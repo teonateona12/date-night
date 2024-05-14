@@ -1,4 +1,4 @@
-﻿namespace date_night.model
+﻿namespace date_night.Model
 {
     public class Category
     {
