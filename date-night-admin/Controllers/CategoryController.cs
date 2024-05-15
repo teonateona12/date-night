@@ -1,12 +1,12 @@
-﻿using date_night_user.Data;
-using date_night_user.Model;
-using Microsoft.AspNetCore.Http;
+﻿using date_night_admin.Data;
+using date_night_admin.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace date_night_user.Controllers
+
+namespace date_night_admin.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
