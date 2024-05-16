@@ -53,5 +53,22 @@ namespace date_night_admin.Controllers
 
             return Ok(category);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<List<Category>>> DeleteCategory(int id)
+        {
+            var category = await context.Categories.FindAsync(id);
+
+            if(category == null)
+            {
+                return BadRequest("Category not found");
+            }
+
+            context.Categories.Remove(category);
+
+            await context.SaveChangesAsync();
+
+            return Ok(await context.Categories.ToListAsync());
+        }
     }
 }
