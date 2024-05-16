@@ -24,5 +24,14 @@ namespace date_night_admin.Controllers
 
             return Ok(categories);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<List<Category>>> AddUser(Category request)
+        {
+
+            context.Categories.Add(request);
+            await context.SaveChangesAsync();
+            return Ok(await context.Categories.ToListAsync());
+        }
     }
 }
