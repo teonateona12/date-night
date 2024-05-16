@@ -26,12 +26,32 @@ namespace date_night_admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Category>>> AddUser(Category request)
+        public async Task<ActionResult<List<Category>>> AddCategory(Category request)
         {
 
             context.Categories.Add(request);
+
             await context.SaveChangesAsync();
+
             return Ok(await context.Categories.ToListAsync());
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<List<Category>>> UpdateCategory(Category request)
+        {
+            var category = await context.Categories.FindAsync(request.Id);
+
+            if(category == null)
+            {
+                return BadRequest("Category not found");
+            }
+
+            category.Title = request.Title;
+            category.Image = request.Image;
+
+            await context.SaveChangesAsync();
+
+            return Ok(category);
         }
     }
 }
