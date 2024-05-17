@@ -1,8 +1,6 @@
-﻿using date_night_user.Data;
+﻿using date_night_user.Interfaces;
 using date_night_user.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace date_night_user.Controllers
 {
@@ -10,17 +8,17 @@ namespace date_night_user.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly DataContext context;
+        private readonly ICategoryRepository categoryRepository;
 
-        public CategoryController(DataContext context)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            this.context = context;
+            this.categoryRepository = categoryRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Category>>> GetCategories()
         {
-            var categories = await context.Categories.ToListAsync();
+            var categories = await categoryRepository.GetAll();
 
             return Ok(categories);
         }
