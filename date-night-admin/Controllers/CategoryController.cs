@@ -1,4 +1,5 @@
 ﻿using date_night_admin.Data;
+using date_night_admin.Interfaces;
 using date_night_admin.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,16 +12,18 @@ namespace date_night_admin.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly DataContext context;
+        private readonly ICategoryRepository categoryRepository;
 
-        public CategoryController(DataContext context)
+        public CategoryController(DataContext context, ICategoryRepository categoryRepository)
         {
             this.context = context;
+            this.categoryRepository = categoryRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Category>>> GetCategories()
         {
-            var categories = await context.Categories.ToListAsync();
+            var categories = await categoryRepository.GetAllAsync();
 
             return Ok(categories);
         }
