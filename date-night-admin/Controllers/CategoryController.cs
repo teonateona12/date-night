@@ -11,12 +11,10 @@ namespace date_night_admin.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly DataContext context;
         private readonly ICategoryRepository categoryRepository;
 
-        public CategoryController(DataContext context, ICategoryRepository categoryRepository)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            this.context = context;
             this.categoryRepository = categoryRepository;
         }
 
@@ -48,18 +46,9 @@ namespace date_night_admin.Controllers
         [HttpDelete]
         public async Task<ActionResult<List<Category>>> DeleteCategory(int id)
         {
-            var category = await context.Categories.FindAsync(id);
+            categoryRepository.Delete(id);
 
-            if(category == null)
-            {
-                return BadRequest("Category not found");
-            }
-
-            context.Categories.Remove(category);
-
-            await context.SaveChangesAsync();
-
-            return Ok(await context.Categories.ToListAsync());
+            return Ok();
         }
     }
 }

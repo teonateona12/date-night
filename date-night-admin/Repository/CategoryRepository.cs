@@ -21,6 +21,22 @@ namespace date_night_admin.Repository
             return category;
         }
 
+        public async Task<Category?> Delete(int id)
+        {
+            var existingCategory = context.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            context.Categories.Remove(existingCategory);
+
+            await context.SaveChangesAsync();
+
+            return existingCategory;
+        }
+
         public Task<List<Category>> GetAllAsync()
         {
             return context.Categories.ToListAsync();
