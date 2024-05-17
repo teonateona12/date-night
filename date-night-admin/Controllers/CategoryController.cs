@@ -31,12 +31,9 @@ namespace date_night_admin.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Category>>> AddCategory(Category request)
         {
+            categoryRepository.Create(request);
 
-            context.Categories.Add(request);
-
-            await context.SaveChangesAsync();
-
-            return Ok(await context.Categories.ToListAsync());
+            return Ok(request);
         }
 
         [HttpPut]

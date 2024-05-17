@@ -13,6 +13,14 @@ namespace date_night_admin.Repository
         {
             this.context = context;
         }
+
+        public async Task<Category> Create(Category category)
+        {
+            await context.Categories.AddAsync(category);
+            await context.SaveChangesAsync();
+            return category;
+        }
+
         public Task<List<Category>> GetAllAsync()
         {
             return context.Categories.ToListAsync();
