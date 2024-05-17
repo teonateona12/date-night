@@ -25,5 +25,23 @@ namespace date_night_admin.Repository
         {
             return context.Categories.ToListAsync();
         }
+
+        public async Task<Category?> Update(int id, Category category)
+        {
+            var existingCategory = context.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            existingCategory.Title = category.Title;
+            existingCategory.Image = category.Image;
+
+            await context.SaveChangesAsync();
+
+            return existingCategory;
+
+        }
     }
 }

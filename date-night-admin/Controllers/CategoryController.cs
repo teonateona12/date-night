@@ -37,19 +37,10 @@ namespace date_night_admin.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<Category>>> UpdateCategory(Category request)
+        [Route("{id}")]
+        public async Task<ActionResult<List<Category>>> UpdateCategory(int id, Category request)
         {
-            var category = await context.Categories.FindAsync(request.Id);
-
-            if(category == null)
-            {
-                return BadRequest("Category not found");
-            }
-
-            category.Title = request.Title;
-            category.Image = request.Image;
-
-            await context.SaveChangesAsync();
+            var category = await categoryRepository.Update(id, request);
 
             return Ok(category);
         }
