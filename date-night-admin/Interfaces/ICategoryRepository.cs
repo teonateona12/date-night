@@ -8,7 +8,5 @@ namespace date_night_admin.Interfaces
         Task<Category> Create(Category category);
         Task<Category?> Update(int id, Category category);
         Task<Category?> Delete(int id);
-
-
     }
 }

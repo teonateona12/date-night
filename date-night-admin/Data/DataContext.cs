@@ -14,7 +14,23 @@ namespace date_night_admin.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.Property(a => a.Title).IsRequired();
 
+            });
+
+            modelBuilder.Entity<Item>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.Property(a => a.Name).IsRequired();
+
+                entity.HasOne(a => a.Category).WithMany(p => p.Items)
+                .HasForeignKey(a => a.Id)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            });
         }
     }
 }
