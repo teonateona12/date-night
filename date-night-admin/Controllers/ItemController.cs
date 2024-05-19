@@ -22,5 +22,13 @@ namespace date_night_admin.Controllers
 
             return Ok(items);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Item>> CreateItem(Item item)
+        {
+           itemRepository.Create(item);
+
+           return Ok(item);
+        }
     }
 }

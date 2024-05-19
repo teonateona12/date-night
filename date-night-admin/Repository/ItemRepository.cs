@@ -13,9 +13,13 @@ namespace date_night_admin.Repository
         {
             this.context = context;
         }
-        public Task<Item> Create(Item item)
+        public async Task<Item> Create(Item item)
         {
-            throw new NotImplementedException();
+            await context.Items.AddAsync(item);
+
+            await context.SaveChangesAsync();
+            
+            return item;
         }
 
         public Task<Item?> Delete(int id)
