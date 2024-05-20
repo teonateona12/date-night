@@ -11,8 +11,8 @@ using date_night_admin.Data;
 namespace date_night_admin.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240519093233_AddItems")]
-    partial class AddItems
+    [Migration("20240520075328_ChangeIdentityProperty")]
+    partial class ChangeIdentityProperty
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,10 @@ namespace date_night_admin.Migrations
             modelBuilder.Entity("date_night_admin.Model.Item", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -63,6 +66,8 @@ namespace date_night_admin.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Items");
                 });
 
@@ -70,7 +75,7 @@ namespace date_night_admin.Migrations
                 {
                     b.HasOne("date_night_admin.Model.Category", "Category")
                         .WithMany("Items")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

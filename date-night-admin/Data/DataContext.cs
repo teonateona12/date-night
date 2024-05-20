@@ -7,8 +7,8 @@ namespace date_night_admin.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
         }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
 
@@ -17,19 +17,17 @@ namespace date_night_admin.Data
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(c => c.Id);
-                entity.Property(a => a.Title).IsRequired();
-
+                entity.Property(c => c.Title).IsRequired();
             });
 
             modelBuilder.Entity<Item>(entity =>
             {
-                entity.HasKey(c => c.Id);
-                entity.Property(a => a.Name).IsRequired();
-
-                entity.HasOne(a => a.Category).WithMany(p => p.Items)
-                .HasForeignKey(a => a.Id)
-                .OnDelete(DeleteBehavior.NoAction);
-
+                entity.HasKey(i => i.Id);
+                entity.Property(i => i.Name).IsRequired();
+                entity.HasOne(i => i.Category)
+                      .WithMany(c => c.Items)
+                      .HasForeignKey(i => i.CategoryId)
+                      .OnDelete(DeleteBehavior.NoAction);
             });
         }
     }
