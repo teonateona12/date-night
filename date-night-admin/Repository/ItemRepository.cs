@@ -43,9 +43,22 @@ namespace date_night_admin.Repository
             return context.Items.ToListAsync();
         }
 
-        public Task<Item?> Update(int id, Item item)
+        public async Task<Item?> Update(int id, Item item)
         {
-            throw new NotImplementedException();
+            var existingItem = context.Items.FirstOrDefault(x => x.Id == id);
+
+            if (existingItem == null)
+            {
+                return null;
+            }
+
+            existingItem.Description = item.Description;
+            existingItem.Name = item.Name;
+            existingItem.Category = item.Category;
+
+            await context.SaveChangesAsync();
+
+            return existingItem;
         }
     }
 }

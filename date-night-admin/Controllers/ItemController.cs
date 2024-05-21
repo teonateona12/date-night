@@ -38,5 +38,13 @@ namespace date_night_admin.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<ActionResult<Item>> UpdateItem(int id, Item item)
+        {
+            var updatedItem = itemRepository.Update(id, item);
+
+            return Ok(updatedItem);
+        }
     }
 }
