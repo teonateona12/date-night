@@ -1,4 +1,5 @@
-﻿using date_night_admin.Data;
+﻿using AutoMapper;
+using date_night_admin.Data;
 using date_night_admin.Interfaces;
 using date_night_admin.Model;
 using Microsoft.EntityFrameworkCore;
@@ -8,13 +9,17 @@ namespace date_night_admin.Repository
     public class ItemRepository : IItemRepository
     {
         private readonly DataContext context;
+        private readonly IMapper mapper;
 
-        public ItemRepository(DataContext context)
+        public ItemRepository(DataContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
-        public async Task<Item> Create(Item item)
+        public async Task<Item> Create(ItemDto itemDto)
         {
+            var item = mapper.Map<Item>(itemDto);
+
             await context.Items.AddAsync(item);
 
             await context.SaveChangesAsync();

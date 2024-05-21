@@ -24,11 +24,14 @@ namespace date_night_admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Item>> CreateItem(Item item)
+        public async Task<ActionResult<Item>> CreateItem(ItemDto itemDto)
         {
-           itemRepository.Create(item);
+            //itemRepository.Create(itemDto);
 
-           return Ok(item);
+            //return Ok(itemDto);
+            var item = await itemRepository.Create(itemDto);
+            return Ok(item);
+
         }
 
         [HttpDelete]
