@@ -30,5 +30,13 @@ namespace date_night_admin.Controllers
 
            return Ok(item);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<Item>> DeleteItem(int id)
+        {
+            itemRepository.Delete(id);
+
+            return Ok();
+        }
     }
 }

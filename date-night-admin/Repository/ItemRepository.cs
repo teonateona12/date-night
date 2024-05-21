@@ -22,9 +22,20 @@ namespace date_night_admin.Repository
             return item;
         }
 
-        public Task<Item?> Delete(int id)
+        public async Task<Item?> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = context.Items.FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+            {
+                return null;
+            }
+
+            context.Items.Remove(item);
+
+            await context.SaveChangesAsync();
+
+            return item;
         }
 
         public Task<List<Item>> GetAllAsync()
