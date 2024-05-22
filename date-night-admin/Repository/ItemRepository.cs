@@ -56,21 +56,29 @@ namespace date_night_admin.Repository
         }
 
 
-        public async Task<Item?> Update(int id, Item item)
+        public async Task<Item> UpdateAsync(int id, ItemDto itemDto)
         {
-            var existingItem = context.Items.FirstOrDefault(x => x.Id == id);
+            var existingItem = await context.Items.Include(i => i.Category).FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingItem == null)
             {
                 return null;
             }
 
-            existingItem.Description = item.Description;
-            existingItem.Name = item.Name;
-            existingItem.Category = item.Category;
+            existingItem.Description = itemDto.Description;
+            existingItem.Name = itemDto.Name;
+
+            var category = await context.Categories.FirstOrDefaultAsync(c => c.Title == itemDto.CategoryTitle);
+            if (category != null)
+            {
+                existingItem.CategoryId = category.Id;
+            }
+            else
+            {
+                return null;
+            }
 
             await context.SaveChangesAsync();
-
             return existingItem;
         }
     }

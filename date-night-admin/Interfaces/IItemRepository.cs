@@ -6,7 +6,7 @@ namespace date_night_admin.Interfaces
     {
         Task<List<ItemDto>> GetAllAsync();
         Task<Item> Create(ItemDto itemDto);
-        Task<Item?> Update(int id, Item item);
+        Task<Item> UpdateAsync(int id, ItemDto itemDto);
         Task<Item?> Delete(int id);
     }
 }

@@ -40,10 +40,15 @@ namespace date_night_admin.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<ActionResult<Item>> UpdateItem(int id, Item item)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Item>> UpdateItem(int id, ItemDto itemDto)
         {
-            var updatedItem = itemRepository.Update(id, item);
+            var updatedItem = await itemRepository.UpdateAsync(id, itemDto);
+
+            if (updatedItem == null)
+            {
+                return NotFound();
+            }
 
             return Ok(updatedItem);
         }
