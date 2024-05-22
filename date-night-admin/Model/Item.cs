@@ -1,5 +1,4 @@
-﻿
-namespace date_night_admin.Model
+﻿namespace date_night_admin.Model
 {
     public class Item
     {

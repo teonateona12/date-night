@@ -8,10 +8,10 @@ namespace date_night_admin
         public MappingProfile()
         {
             CreateMap<Item, ItemDto>()
-                .ForMember(dest => dest.CategoryTitle, opt => opt.MapFrom(src => src.Category.Title)); 
+                 .ForMember(dest => dest.CategoryTitle, opt => opt.MapFrom(src => src.Category.Title));
 
-            CreateMap<ItemDto, Item>();
-
+            CreateMap<ItemDto, Item>()
+                .ForMember(dest => dest.Category, opt => opt.Ignore());
         }
     }
 }

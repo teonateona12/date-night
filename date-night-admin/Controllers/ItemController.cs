@@ -16,7 +16,7 @@ namespace date_night_admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Item>>> GetItems()
+        public async Task<ActionResult<List<ItemDto>>> GetItems()
         {
             var items = await itemRepository.GetAllAsync();
 
@@ -28,14 +28,18 @@ namespace date_night_admin.Controllers
         {
             var item = await itemRepository.Create(itemDto);
 
-            return Ok(item);
+            return Ok(itemDto);
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Item>> DeleteItem(int id)
         {
-            itemRepository.Delete(id);
+            var item = await itemRepository.Delete(id);
+            if(item == null)
+            {
+                return NotFound("Item Not Found");
+            }
 
             return Ok();
         }
@@ -47,10 +51,10 @@ namespace date_night_admin.Controllers
 
             if (updatedItem == null)
             {
-                return NotFound();
+                return NotFound("Item Not Found");
             }
 
-            return Ok(updatedItem);
+            return Ok(itemDto);
         }
     }
 }

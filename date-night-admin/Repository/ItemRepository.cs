@@ -2,6 +2,7 @@
 using date_night_admin.Data;
 using date_night_admin.Interfaces;
 using date_night_admin.Model;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace date_night_admin.Repository
@@ -16,6 +17,7 @@ namespace date_night_admin.Repository
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<Item> Create(ItemDto itemDto)
         {
             var category = await context.Categories.FirstOrDefaultAsync(c => c.Title == itemDto.CategoryTitle);
@@ -54,7 +56,6 @@ namespace date_night_admin.Repository
             var items = await context.Items.Include(i => i.Category).ToListAsync();
             return mapper.Map<List<ItemDto>>(items);
         }
-
 
         public async Task<Item> UpdateAsync(int id, ItemDto itemDto)
         {
