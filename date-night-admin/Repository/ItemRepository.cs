@@ -18,12 +18,18 @@ namespace date_night_admin.Repository
         }
         public async Task<Item> Create(ItemDto itemDto)
         {
+            var category = await context.Categories.FirstOrDefaultAsync(c => c.Title == itemDto.CategoryTitle);
+            if (category == null)
+            {
+                throw new InvalidOperationException("Category not found.");
+            }
+
             var item = mapper.Map<Item>(itemDto);
+            item.CategoryId = category.Id;
 
-            await context.Items.AddAsync(item);
-
+            context.Items.Add(item);
             await context.SaveChangesAsync();
-            
+
             return item;
         }
 
@@ -43,10 +49,12 @@ namespace date_night_admin.Repository
             return item;
         }
 
-        public Task<List<Item>> GetAllAsync()
+        public async Task<List<ItemDto>> GetAllAsync()
         {
-            return context.Items.ToListAsync();
+            var items = await context.Items.Include(i => i.Category).ToListAsync();
+            return mapper.Map<List<ItemDto>>(items);
         }
+
 
         public async Task<Item?> Update(int id, Item item)
         {

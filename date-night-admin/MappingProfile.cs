@@ -7,8 +7,11 @@ namespace date_night_admin
     {
         public MappingProfile()
         {
-            CreateMap<Item, ItemDto>().ReverseMap();
-            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Item, ItemDto>()
+                .ForMember(dest => dest.CategoryTitle, opt => opt.MapFrom(src => src.Category.Title)); 
+
+            CreateMap<ItemDto, Item>();
+
         }
     }
 }
