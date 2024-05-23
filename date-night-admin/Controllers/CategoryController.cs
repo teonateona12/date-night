@@ -19,7 +19,7 @@ namespace date_night_admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Category>>> GetCategories()
+        public async Task<ActionResult<List<CategoryDto>>> GetCategories()
         {
             var categories = await categoryRepository.GetAllAsync();
 

@@ -12,6 +12,9 @@ namespace date_night_admin
 
             CreateMap<ItemDto, Item>()
                 .ForMember(dest => dest.Category, opt => opt.Ignore());
+
+            CreateMap<CategoryDto, Category>();
+            CreateMap<Category, CategoryDto>();
         }
     }
 }

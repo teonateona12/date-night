@@ -40,9 +40,10 @@ namespace date_night_admin.Repository
             return existingCategory;
         }
 
-        public Task<List<Category>> GetAllAsync()
+        public Task<List<CategoryDto>> GetAllAsync()
         {
-            return context.Categories.ToListAsync();
+            var category = context.Categories.Select(c => mapper.Map<CategoryDto>(c));
+            return category.ToListAsync();
         }
 
         public async Task<Category?> Update(int id, Category category)
