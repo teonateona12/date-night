@@ -17,8 +17,10 @@ namespace date_night_admin.Repository
             this.mapper = mapper;
         }
 
-        public async Task<Category> Create(Category category)
+        public async Task<Category> Create(CategoryDto categoryDto)
         {
+            var category = mapper.Map<Category>(categoryDto);
+
             await context.Categories.AddAsync(category);
             await context.SaveChangesAsync();
             return category;
