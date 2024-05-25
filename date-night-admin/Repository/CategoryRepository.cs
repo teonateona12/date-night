@@ -23,6 +23,7 @@ namespace date_night_admin.Repository
 
             await context.Categories.AddAsync(category);
             await context.SaveChangesAsync();
+
             return category;
         }
 
