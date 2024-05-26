@@ -54,7 +54,7 @@ namespace date_night_admin.Controllers
                 return NotFound("Item Not Found");
             }
 
-            return Ok(updatedItem);
+            return Ok(itemDto);
         }
     }
 }
