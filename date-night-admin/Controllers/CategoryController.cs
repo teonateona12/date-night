@@ -35,7 +35,7 @@ namespace date_night_admin.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<ActionResult<List<Category>>> UpdateCategory(int id, Category request)
+        public async Task<ActionResult<Category>> UpdateCategory(int id, CategoryDto request)
         {
             var category = await categoryRepository.Update(id, request);
 

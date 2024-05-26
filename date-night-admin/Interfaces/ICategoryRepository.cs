@@ -6,7 +6,7 @@ namespace date_night_admin.Interfaces
     {
         Task<List<CategoryDto>> GetAllAsync();
         Task<Category> Create(CategoryDto categoryDto);
-        Task<Category?> Update(int id, Category category);
+        Task<Category?> Update(int id, CategoryDto category);
         Task<Category?> Delete(int id);
     }
 }

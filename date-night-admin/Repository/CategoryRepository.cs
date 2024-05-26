@@ -49,22 +49,22 @@ namespace date_night_admin.Repository
             return category.ToListAsync();
         }
 
-        public async Task<Category?> Update(int id, Category category)
+        public async Task<Category?> Update(int id, CategoryDto categoryDto)
         {
-            var existingCategory = context.Categories.FirstOrDefault(c => c.Id == id);
+            var existingCategory = await context.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
             if (existingCategory == null)
             {
                 return null;
             }
 
-            existingCategory.Title = category.Title;
-            existingCategory.Image = category.Image;
+            mapper.Map(categoryDto, existingCategory);
+            existingCategory.Id = id;
 
             await context.SaveChangesAsync();
 
             return existingCategory;
-
         }
+
     }
 }
