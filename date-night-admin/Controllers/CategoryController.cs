@@ -27,10 +27,9 @@ namespace date_night_admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Category>>> AddCategory(CategoryDto request)
+        public async Task<ActionResult<Category>> AddCategory(CategoryDto request)
         {
-            var category = categoryRepository.Create(request);
-
+            var category = await categoryRepository.Create(request);
             return Ok(category);
         }
 
