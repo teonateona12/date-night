@@ -58,11 +58,10 @@ namespace date_night_admin.Repository
                 return null;
             }
 
-            mapper.Map(categoryDto, existingCategory);
+            mapper.Map<CategoryDto>(existingCategory);
             existingCategory.Id = id;
 
             await context.SaveChangesAsync();
-
             return existingCategory;
         }
 

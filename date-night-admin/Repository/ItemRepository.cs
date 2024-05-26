@@ -57,7 +57,7 @@ namespace date_night_admin.Repository
             return mapper.Map<List<ItemDto>>(items);
         }
 
-        public async Task<Item> UpdateAsync(int id, ItemDto itemDto)
+        public async Task<Item?> UpdateAsync(int id, ItemDto itemDto)
         {
             var existingItem = await context.Items.Include(i => i.Category).FirstOrDefaultAsync(x => x.Id == id);
 
@@ -66,21 +66,20 @@ namespace date_night_admin.Repository
                 return null;
             }
 
-            existingItem.Description = itemDto.Description;
-            existingItem.Name = itemDto.Name;
-
             var category = await context.Categories.FirstOrDefaultAsync(c => c.Title == itemDto.CategoryTitle);
-            if (category != null)
-            {
-                existingItem.CategoryId = category.Id;
-            }
-            else
+            if (category == null)
             {
                 return null;
             }
 
+            existingItem.CategoryId = category.Id;
+
+            mapper.Map<ItemDto>(existingItem);
+            existingItem.Id = id;
+
             await context.SaveChangesAsync();
             return existingItem;
         }
+
     }
 }
