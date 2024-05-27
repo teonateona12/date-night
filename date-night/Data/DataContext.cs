@@ -1,4 +1,5 @@
 ﻿using date_night_user.Model;
+using date_night_user.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace date_night_user.Data
@@ -10,5 +11,6 @@ namespace date_night_user.Data
             
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Item> Items { get; set; }
     }
 }

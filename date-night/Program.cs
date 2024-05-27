@@ -1,3 +1,4 @@
+using date_night_user.Repository;
 using date_night_user.Data;
 using date_night_user.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -70,7 +70,6 @@ namespace date_night_admin.Repository
             return itemDto;
         }
 
-
         public async Task<Item?> UpdateAsync(int id, ItemDto itemDto)
         {
             var existingItem = await context.Items.Include(i => i.Category).FirstOrDefaultAsync(x => x.Id == id);
