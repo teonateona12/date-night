@@ -5,6 +5,7 @@ namespace date_night_admin.Interfaces
     public interface IItemRepository
     {
         Task<List<ItemDto>> GetAllAsync();
+        Task<ItemDto> GetById(int id);
         Task<Item> Create(ItemDto itemDto);
         Task<Item> UpdateAsync(int id, ItemDto itemDto);
         Task<Item?> Delete(int id);

@@ -23,6 +23,14 @@ namespace date_night_admin.Controllers
             return Ok(items);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ItemDto>> GetById(int id)
+        {
+            var item = await itemRepository.GetById(id);
+
+            return Ok(item);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Item>> CreateItem(ItemDto itemDto)
         {

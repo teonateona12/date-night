@@ -57,6 +57,20 @@ namespace date_night_admin.Repository
             return mapper.Map<List<ItemDto>>(items);
         }
 
+        public async Task<ItemDto> GetById(int id)
+        {
+            var item = await context.Items.Include(i => i.Category).FirstOrDefaultAsync(x => x.Id == id);
+            if (item == null)
+            {
+                return null;
+            }
+
+            var itemDto = mapper.Map<ItemDto>(item);
+
+            return itemDto;
+        }
+
+
         public async Task<Item?> UpdateAsync(int id, ItemDto itemDto)
         {
             var existingItem = await context.Items.Include(i => i.Category).FirstOrDefaultAsync(x => x.Id == id);
