@@ -4,6 +4,6 @@ namespace date_night_user.Interfaces
 {
     public interface IItemRepository
     {
-        Task<List<Item>> GetAsync();
+        Task<List<ItemDto>> GetAsync();
     }
 }

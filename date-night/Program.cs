@@ -2,6 +2,7 @@ using date_night_user.Repository;
 using date_night_user.Data;
 using date_night_user.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using date_night_user;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,14 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+});
 
 var app = builder.Build();
 

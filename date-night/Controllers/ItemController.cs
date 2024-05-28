@@ -16,7 +16,7 @@ namespace date_night_user.Controllers
             this.item = item;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Item>>> GetItems()
+        public async Task<ActionResult<List<ItemDto>>> GetItems()
         {
             var items = await item.GetAsync();
 
