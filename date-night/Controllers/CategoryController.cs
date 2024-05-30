@@ -22,5 +22,19 @@ namespace date_night_user.Controllers
 
             return Ok(categories);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<Category>> GetCategoryById(int id)
+        {
+            var category = await categoryRepository.GetById(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
+        }
     }
 }

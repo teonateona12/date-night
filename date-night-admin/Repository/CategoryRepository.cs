@@ -55,6 +55,11 @@ namespace date_night_admin.Repository
                                         .Include(c => c.Items)
                                         .FirstOrDefaultAsync(c => c.Id == id);
 
+            if (category == null)
+            {
+                return null;
+            }
+
             return category;
         }
 

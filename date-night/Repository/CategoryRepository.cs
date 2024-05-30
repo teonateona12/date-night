@@ -17,5 +17,19 @@ namespace date_night_user.Repository
         {
             return context.Categories.ToListAsync();
         }
+
+        public async Task<Category> GetById(int id)
+        {
+            var category = await context.Categories
+                                         .Include(c => c.Items)
+                                         .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null)
+            {
+                return null;
+            }
+
+            return category;
+        }
     }
 }
