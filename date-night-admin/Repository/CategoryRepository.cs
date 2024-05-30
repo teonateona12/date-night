@@ -49,6 +49,16 @@ namespace date_night_admin.Repository
             return category.ToListAsync();
         }
 
+        public async Task<Category> GetById(int id)
+        {
+            var category = await context.Categories
+                                        .Include(c => c.Items)
+                                        .FirstOrDefaultAsync(c => c.Id == id);
+
+            return category;
+        }
+
+
         public async Task<Category?> Update(int id, CategoryDto categoryDto)
         {
             var existingCategory = await context.Categories.FirstOrDefaultAsync(c => c.Id == id);
