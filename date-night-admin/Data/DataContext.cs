@@ -11,6 +11,7 @@ namespace date_night_admin.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<CompanyInformation> CompanyInformation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
