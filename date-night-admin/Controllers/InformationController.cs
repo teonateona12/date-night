@@ -16,11 +16,16 @@ namespace date_night_admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CompanyInformation>>> GetAll()
+        public async Task<ActionResult<CompanyInformation>> Get()
         {
-            var information = await companyInformation.GetAll();
-
+            var information = await companyInformation.Get();
+            if (information == null)
+            {
+                return NotFound();
+            }
             return Ok(information);
         }
+
+
     }
 }

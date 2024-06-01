@@ -23,10 +23,9 @@ namespace date_night_admin.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<List<CompanyInformation>> GetAll()
+        public async Task<CompanyInformation> Get()
         {
-            var information = await context.CompanyInformation.ToListAsync();
-
+            var information = await context.CompanyInformation.FirstOrDefaultAsync();
             return information;
         }
 
