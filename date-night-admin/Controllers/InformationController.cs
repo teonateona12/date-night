@@ -26,6 +26,18 @@ namespace date_night_admin.Controllers
             return Ok(information);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<CompanyInformation>> Create(CompanyInformation information)
+        {
+            var company = await companyInformation.Create(information);
+            if (company == null)
+            {
+                return NotFound();
+            }
+            return Ok(company);
+
+        }
+
 
     }
 }

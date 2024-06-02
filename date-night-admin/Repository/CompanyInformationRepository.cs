@@ -13,9 +13,17 @@ namespace date_night_admin.Repository
         {
             this.context = context;
         }
-        public Task<CompanyInformation> Create(CompanyInformation companyInformation)
+        public async Task<CompanyInformation> Create(CompanyInformation companyInformation)
         {
-            throw new NotImplementedException();
+            bool companyExists = await context.CompanyInformation.AnyAsync();
+
+            if (companyExists)
+            {
+                return null;
+            }
+            await context.CompanyInformation.AddAsync(companyInformation);
+            await context.SaveChangesAsync();
+            return companyInformation;
         }
 
         public Task<CompanyInformation> Delete(int id)
