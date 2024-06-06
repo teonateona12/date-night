@@ -2,7 +2,6 @@
 using date_night_admin.Interfaces;
 using date_night_admin.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace date_night_admin.Controllers
