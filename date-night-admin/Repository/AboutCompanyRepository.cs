@@ -7,36 +7,16 @@ namespace date_night_admin.Repository
 {
     public class AboutCompanyRepository : IAboutCompanyRepository
     {
-        private readonly DataContext _context;
-        private readonly string _imageFolderPath;
+        private readonly DataContext context;
 
         public AboutCompanyRepository(DataContext context)
         {
-            _context = context;
-            _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-
-            if (!Directory.Exists(_imageFolderPath))
-            {
-                Directory.CreateDirectory(_imageFolderPath);
-            }
+            this.context = context;
         }
-        public async Task<AboutCompany> CreateAsync(AboutCompany aboutCompany, IFormFile imageFile)
+        public async Task<AboutCompany> CreateAsync(AboutCompany aboutCompany)
         {
-            if (imageFile != null)
-            {
-                var fileName = Path.GetFileNameWithoutExtension(imageFile.FileName) + "_" + Path.GetRandomFileName() + Path.GetExtension(imageFile.FileName);
-                var filePath = Path.Combine(_imageFolderPath, fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await imageFile.CopyToAsync(stream);
-                }
-
-                aboutCompany.ImageFileName = fileName;
-            }
-
-            _context.AboutCompany.Add(aboutCompany);
-            await _context.SaveChangesAsync();
+            await context.AboutCompany.AddAsync(aboutCompany);
+            await context.SaveChangesAsync();
             return aboutCompany;
         }
     }

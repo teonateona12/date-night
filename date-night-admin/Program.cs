@@ -21,6 +21,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<ICompanyInformationRepository, CompanyInformationRepository>();
+builder.Services.AddScoped<IAboutCompanyRepository, AboutCompanyRepository>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
