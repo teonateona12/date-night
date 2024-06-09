@@ -49,7 +49,16 @@ namespace date_night_admin.Controllers
             return Ok(company);
         }
 
-        []
+        [HttpPut]
+        public async Task<ActionResult<CompanyInformation>> Update(int id, CompanyInformation information)
+        {
+            var company = await companyInformation.Update(id, information);
+            if(company == null)
+            {
+                return NotFound();
+            }
+            return Ok(company);
+        }
 
 
     }
