@@ -45,9 +45,20 @@ namespace date_night_admin.Repository
             return information;
         }
 
-        public Task<CompanyInformation> Update(int id, CompanyInformation companyInformation)
+        public async Task<CompanyInformation> Update(int id, CompanyInformation companyInformation)
         {
-            throw new NotImplementedException();
+            var information = await context.CompanyInformation.FirstOrDefaultAsync(x=>x.Id==id);
+            if(information == null)
+            {
+                return null;
+            }
+
+            information.PhoneNumber = companyInformation.PhoneNumber;
+            information.Email = companyInformation.Email;
+            information.Name = companyInformation.Name;
+
+            await context.SaveChangesAsync();
+            return information;
         }
     }
 }
