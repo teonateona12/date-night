@@ -20,6 +20,20 @@ namespace date_night_admin.Repository
             return aboutCompany;
         }
 
-       
+        public Task<AboutCompany> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<AboutCompany> GetAsync()
+        {
+            var aboutCompany = await context.AboutCompany.FirstOrDefaultAsync();
+            return aboutCompany;
+        }
+
+        public Task<AboutCompany> UpdateAsync(int id, AboutCompany aboutCompany)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
