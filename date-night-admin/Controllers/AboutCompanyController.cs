@@ -28,7 +28,6 @@ namespace date_night_admin.Controllers
             }
             return Ok(createdAboutCompany);
         }
-        //chore
 
     }
 }

@@ -19,5 +19,7 @@ namespace date_night_admin.Repository
             await context.SaveChangesAsync();
             return aboutCompany;
         }
+
+       
     }
 }
