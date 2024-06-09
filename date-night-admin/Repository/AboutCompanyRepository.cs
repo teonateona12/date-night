@@ -20,9 +20,17 @@ namespace date_night_admin.Repository
             return aboutCompany;
         }
 
-        public Task<AboutCompany> DeleteAsync(int id)
+        public async Task<AboutCompany> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var information = await context.AboutCompany.FindAsync(id);
+            if (information != null)
+            {
+                return null;
+            }
+
+            context.AboutCompany.Remove(information);
+            await context.SaveChangesAsync();
+            return information;
         }
 
         public async Task<AboutCompany> GetAsync()
