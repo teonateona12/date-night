@@ -29,5 +29,12 @@ namespace date_night_admin.Controllers
             return Ok(createdAboutCompany);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<AboutCompany>> Get()
+        {
+            var aboutCompany = await aboutCompanyRepository.GetAsync();
+
+            return Ok(aboutCompany);
+        }
     }
 }
