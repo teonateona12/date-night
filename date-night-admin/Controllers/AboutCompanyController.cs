@@ -47,5 +47,18 @@ namespace date_night_admin.Controllers
             }
             return Ok(information);
         }
+
+        [HttpPut]
+
+        public async Task<ActionResult<AboutCompany>> Update (int id, AboutCompany aboutCompany)
+        {
+            var information = await aboutCompanyRepository.UpdateAsync(id, aboutCompany);
+
+            if(information == null)
+            {
+                return NotFound();
+            }
+            return Ok(information);
+        }
     }
 }
