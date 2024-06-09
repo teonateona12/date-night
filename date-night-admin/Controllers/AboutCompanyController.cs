@@ -36,5 +36,16 @@ namespace date_night_admin.Controllers
 
             return Ok(aboutCompany);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<AboutCompany>> Remove(int id)
+        {
+            var information = await aboutCompanyRepository.DeleteAsync(id);
+            if (information == null)
+            {
+                return NotFound();
+            }
+            return Ok(information);
+        }
     }
 }

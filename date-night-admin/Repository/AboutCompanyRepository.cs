@@ -22,8 +22,8 @@ namespace date_night_admin.Repository
 
         public async Task<AboutCompany> DeleteAsync(int id)
         {
-            var information = await context.AboutCompany.FindAsync(id);
-            if (information != null)
+            var information = await context.AboutCompany.FirstOrDefaultAsync(x=>x.Id == id);
+            if (information == null)
             {
                 return null;
             }

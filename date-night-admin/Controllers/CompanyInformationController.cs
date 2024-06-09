@@ -6,11 +6,11 @@ namespace date_night_admin.Controllers
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    public class InformationController : Controller
+    public class CompanyInformationController : Controller
     {
         private readonly ICompanyInformationRepository companyInformation;
 
-        public InformationController(ICompanyInformationRepository companyInformation)
+        public CompanyInformationController(ICompanyInformationRepository companyInformation)
         {
             this.companyInformation = companyInformation;
         }
